@@ -1,0 +1,28 @@
+[build]
+  base = "/"
+  publish = "/"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Mencegah website di-frame oleh site lain
+    X-Frame-Options = "DENY"
+    # Proteksi XSS
+    X-XSS-Protection = "1; mode=block"
+    # Mencegah MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Mengontrol informasi yang dikirim ke site lain
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Mencegah akses langsung ke file
+    X-Robots-Tag = "noindex, nofollow"
+    # Menonaktifkan cache untuk mencegah penyimpanan lokal
+    Cache-Control = "no-store, no-cache, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+    # Content Security Policy untuk membatasi sumber daya
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
